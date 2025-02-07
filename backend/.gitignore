@@ -1,0 +1,47 @@
+# Node.js
+node_modules/
+
+# Build artifacts
+dist/
+build/
+
+# Log files
+logs/
+*.log
+
+# IDE-specific files
+.vscode/
+*.suo
+*.user
+*.sln
+*.csproj
+*.vspscc
+
+# Testing files
+coverage/
+*.spec.js
+*.test.js
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# Editor files
+.editorconfig
+.prettierrc
+
+# Docker files
+Dockerfile*
+docker-compose.yml
+.dockerignore
+
+# Secrets
+secrets.json 
+.secrets
