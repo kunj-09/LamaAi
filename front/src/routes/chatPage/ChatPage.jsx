@@ -4,7 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import Markdown from "react-markdown";
 import { IKImage } from "imagekitio-react";
-// hiii 
+import React from "react";  // Ensure React is imported for React.Fragment
+
 const ChatPage = () => {
   const path = useLocation().pathname;
   const chatId = path.split("/").pop();
@@ -27,8 +28,9 @@ const ChatPage = () => {
             ? "Loading..."
             : error
             ? "Something went wrong!"
-            : data?.history?.map((message, i) => (
-              <>
+            : Array.isArray(data?.history)
+            ? data.history.map((message, i) => (
+                <React.Fragment key={i}>
                   {message.img && (
                     <IKImage
                       urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
@@ -44,14 +46,14 @@ const ChatPage = () => {
                     className={
                       message.role === "user" ? "message user" : "message"
                     }
-                    key={i}
                   >
-                    <Markdown>{message.parts[0].text}</Markdown>
+                    <Markdown>{message.parts[0]?.text}</Markdown>
                   </div>
-                </>
-              ))}
+                </React.Fragment>
+              ))
+            : "No chat history available"}
 
-          {data && <NewPrompt data={data}/>}
+          {data && <NewPrompt data={data} />}
         </div>
       </div>
     </div>
